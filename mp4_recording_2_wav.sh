@@ -15,17 +15,4 @@ function mp4_2_wav {
     done
 }
 
-jsc=/storage/recordings/2713/
-mbc1=/storage/recordings/2769/
-alarabiya=/storage/recordings/18396/
-emarat_fm=/storage/recordings/3289/
-
-recording_date=2017/11/01/
-out=wav_2017_11_01/
-
-mp4_2_wav ${jsc}${recording_date} ${out}
-mp4_2_wav ${mbc1}${recording_date} ${out}
-mp4_2_wav ${alarabiya}${recording_date} ${out}
-mp4_2_wav ${emarat_fm}${recording_date} ${out}
-
 echo "done!"
