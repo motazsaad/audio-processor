@@ -2,7 +2,6 @@ import argparse
 import datetime
 import glob
 import os
-import shutil
 
 from pydub import AudioSegment
 from pydub import silence
@@ -30,16 +29,8 @@ def split_wav_on_silence(audio_seg):
 def export_chunks(nuggets, wave_file, out_dir):
     print('number of chucks:{}'.format(len(nuggets)))
     base_name = os.path.splitext(os.path.basename(wave_file)[0])
-    if not os.path.exists(os.path.join('out_dir', base_name)):
-        print("making ", os.path.join('out_dir', base_name))
-        os.mkdir(os.path.join('out_dir', base_name))
-    else:
-        print("removing ", os.path.join('out_dir', base_name))
-        shutil.rmtree(os.path.join('out_dir', base_name))
-        print("making ", os.path.join('out_dir', base_name))
-        os.mkdir(os.path.join('out_dir', base_name))
     for i, chunk in enumerate(nuggets):
-        out_file = "{}/{}/{}_{}.wav".format(out_dir, base_name, base_name, str(i).zfill(2))
+        out_file = "{}/{}_{}.wav".format(out_dir, base_name, str(i).zfill(2))
         chunk.export(out_file, format="wav")
 
 
