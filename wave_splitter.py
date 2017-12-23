@@ -28,9 +28,10 @@ def split_wav_on_silence(audio_seg):
 
 def export_chunks(nuggets, wave_file, out_dir):
     print('number of chucks:{}'.format(len(nuggets)))
-    base_name = os.path.splitext(os.path.basename(wave_file)[0])
+    base_name = os.path.basename(wave_file).replace('.wav', '')
     for i, chunk in enumerate(nuggets):
         out_file = "{}/{}_{}.wav".format(out_dir, base_name, str(i).zfill(2))
+        print('out file:', out_file)
         chunk.export(out_file, format="wav")
 
 
