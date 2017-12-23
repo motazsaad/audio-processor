@@ -1,9 +1,8 @@
 import argparse
 import datetime
-import io
+import glob
 import os
 import shutil
-import glob
 
 from pydub import AudioSegment
 from pydub import silence
@@ -30,7 +29,7 @@ def split_wav_on_silence(audio_seg):
 
 def export_chunks(nuggets, wave_file, out_dir):
     print('number of chucks:{}'.format(len(nuggets)))
-    base_name, ext = os.path.basename(wave_file).split('.')
+    base_name = os.path.splitext(os.path.basename(wave_file)[0])
     if not os.path.exists(os.path.join('out_dir', base_name)):
         print("making ", os.path.join('out_dir', base_name))
         os.mkdir(os.path.join('out_dir', base_name))
@@ -66,6 +65,5 @@ if __name__ == '__main__':
             # split the 10min into chunks (25sec each one)
             # 25 sec * 24 parts = 10 min ; 24 parts / 8 cpus
             chunks = dubutils.make_chunks(audio_segment, 25000)
-        print('number of chucks:{}'.format(len(chunks)))
         out = args.outdir
         export_chunks(chunks, wav_file, out)
