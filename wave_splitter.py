@@ -27,19 +27,19 @@ def split_wav_on_silence(audio_seg):
     return nuggets
 
 
-def export_chunks(nuggets, wave_file):
+def export_chunks(nuggets, wave_file, out_dir):
     print('number of chucks:{}'.format(len(nuggets)))
     base_name, ext = os.path.basename(wave_file).split('.')
-    if not os.path.exists('./wav_split/' + base_name):
-        print("making ", './wav_split/' + base_name)
-        os.mkdir('./wav_split/' + base_name)
+    if not os.path.exists(os.path.join('out_dir', base_name)):
+        print("making ", os.path.join('out_dir', base_name))
+        os.mkdir(os.path.join('out_dir', base_name))
     else:
-        print("removing ", './wav_split/' + base_name)
-        shutil.rmtree('./wav_split/' + base_name)
-        print("making ", './wav_split/' + base_name)
-        os.mkdir('./wav_split/' + base_name)
+        print("removing ", os.path.join('out_dir', base_name))
+        shutil.rmtree(os.path.join('out_dir', base_name))
+        print("making ", os.path.join('out_dir', base_name))
+        os.mkdir(os.path.join('out_dir', base_name))
     for i, chunk in enumerate(nuggets):
-        out_file = "./wav_split/{}/{}_{}.wav".format(base_name, base_name, str(i).zfill(2))
+        out_file = "{}/{}/{}_{}.wav".format(out_dir, base_name, base_name, str(i).zfill(2))
         chunk.export(out_file, format="wav")
 
 
@@ -63,6 +63,8 @@ parser = argparse.ArgumentParser(description='wave splitter (split wave sound in
                                              'based on silence or fixed intervals')
 parser.add_argument('-i', '--infile', type=str,
                     help='input wave file', required=True)
+parser.add_argument('-o', '--outdir', type=str,
+                    help='output directory', required=True)
 parser.add_argument('-s', '--split', type=str, choices=['fixed', 'silence'],
                     help='split mode', required=True)
 
@@ -80,3 +82,5 @@ if __name__ == '__main__':
         chunks = dubutils.make_chunks(audio_segment, 25000)
     print('number of chucks:{}'.format(len(chunks)))
     files_in_memo = audio_chunks_to_io_bytes(chunks)
+    out = args.outdir 
+    export_chunks(chunks, wav_file, out)
