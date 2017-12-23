@@ -61,3 +61,4 @@ if __name__ == '__main__':
             chunks = dubutils.make_chunks(audio_segment, 25000)
         out = args.outdir
         export_chunks(chunks, wav_file, out)
+        print('done!')
