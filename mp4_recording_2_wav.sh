@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-
+if [ $# -ne 3 ]; then
+    echo "usage ${0} in_dir out_dir";
+    exit -1;
+fi
 
 function mp4_2_wav {
     in_dir=${1}
@@ -14,5 +17,7 @@ function mp4_2_wav {
         ffmpeg -i ${mp4_file} -vn -acodec pcm_s16le -ac 1 -ar 16000 ${out_dir}/${fname}.wav
     done
 }
+
+mp4_2_wav ${1} ${2}
 
 echo "done!"
