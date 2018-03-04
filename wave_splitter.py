@@ -10,7 +10,9 @@ from pydub import utils as dubutils
 # silence_thresh
 # anything quieter than this will be considered silence.
 # default: -16dBFS
-threshold = -36
+# the value below is determined by trail and error on recordings 
+# You can try different values on your recordings to get the best value 
+threshold = -36 
 
 my_min_silence_len = 1000  # 450  # min_silence_len default: 1000ms
 my_keep_silence = 100  # 350  # keep_silence default: 100ms
