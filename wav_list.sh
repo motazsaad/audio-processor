@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #echo ${#}
 if [ $# -ne 1 ]; then
-    echo "usage ${0} in_dir";
+    echo "usage: ${0} in_dir";
     exit -1;
 fi
 
