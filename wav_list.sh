@@ -11,7 +11,7 @@ function make_wav_list {
     do
         duration=$(sox --i -D "$wav_file")
         file_name=$(basename ${wav_file})
-        printf "%s\t%s\n" ${file_name} ${duration}
+        printf "%.1f\t%s\n" ${file_name} ${duration}
     done
 }
 
