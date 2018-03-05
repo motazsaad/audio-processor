@@ -10,7 +10,8 @@ function make_wav_list {
     for wav_file in ${in_dir}*.wav
     do
         duration=$(sox --i -D "$wav_file")
-        printf "%s\t%s" ${wav_file} ${duration}
+        file_name=$(basename ${wav_file})
+        printf "%s\t%s\n" ${file_name} ${duration}
     done
 }
 
