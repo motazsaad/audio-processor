@@ -37,6 +37,8 @@ def export_chunks(nuggets, wave_file, out_dir):
     base_name = os.path.basename(wave_file).replace('.wav', '')
     if out_dir[-1] == '/':
         out_dir = out_dir[:-1]
+    if not os.path.exists(out_dir):
+        os.makedirs(out_dir)
     for i, chunk in enumerate(nuggets):
         out_file = "{}/{}_{}.wav".format(out_dir, base_name, str(i).zfill(2))
         print('out file:', out_file)
