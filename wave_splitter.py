@@ -14,6 +14,10 @@ from pydub import utils as dubutils
 # You can try different values on your recordings to get the best value 
 threshold = -36 
 
+# split the 10min into chunks (25sec each one)
+# 25 sec * 24 parts = 10 min ; 24 parts / 8 cpus
+my_chunk_length = 25000 # 25000 milli-seconds (25 seconds)
+
 my_min_silence_len = 1000  # 450  # min_silence_len default: 1000ms
 my_keep_silence = 100  # 350  # keep_silence default: 100ms
 
@@ -53,14 +57,13 @@ if __name__ == '__main__':
     wav_list = sorted(glob.glob(os.path.join(args.indir, '*.wav')))
     for wav_file in wav_list:
         print('processing', wav_file)
-        audio_segment = AudioSegment.from_wav(wav_file)
-        print('wave duration: {}'.format(datetime.timedelta(seconds=audio_segment.duration_seconds)))
+        my_audio_segment = AudioSegment.from_wav(wav_file)
+        print('wave duration: {}'.format(datetime.timedelta(seconds=my_audio_segment.duration_seconds)))
         if args.split == 'silence':
-            chunks = split_wav_on_silence(audio_segment)
+            chunks = split_wav_on_silence(my_audio_segment)
         elif args.split == 'fixed':
-            # split the 10min into chunks (25sec each one)
-            # 25 sec * 24 parts = 10 min ; 24 parts / 8 cpus
-            chunks = dubutils.make_chunks(audio_segment, 25000)
+            chunks = dubutils.make_chunks(audio_segment=my_audio_segment, 
+            chunk_length=my_chunk_length)
         out = args.outdir
         export_chunks(chunks, wav_file, out)
         print('done!')
