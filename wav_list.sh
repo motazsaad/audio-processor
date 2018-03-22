@@ -15,6 +15,7 @@ function make_wav_list {
     done
 }
 
+# call the function with CLI args 
 make_wav_list ${1}
 
 echo "done!"

@@ -20,6 +20,7 @@ function mp4_2_wav {
     done
 }
 
+# call the function with CLI args 
 mp4_2_wav ${1} ${2} ${3}
 
 echo "done!"
