@@ -53,7 +53,12 @@ silence_threshold = args.silence_threshold
 output_dir = args.output_dir
 output_filename_prefix = os.path.splitext(os.path.basename(input_filename))[0]
 dry_run = args.dry_run
-
+##############################################
+print('argument values:')
+print("min-silence-length: {}".format(window_duration))
+print("silence-threshold: {}".format(silence_threshold))
+print("step-duration: {}".format(step_duration))
+##############################################
 print ("Splitting {} where energy is below {}% for longer than {}s.".format(
     input_filename,
     silence_threshold * 100.,
