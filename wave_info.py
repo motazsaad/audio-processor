@@ -27,7 +27,7 @@ for fname in onlyWavfiles:
 		if duration > 60: greater_than_60 +=1
 		if 60 >= duration >= 20: between_60_and_20 +=1
 		if duration < 20: less_than_20 +=1 	 
-		print("{0}\t{1:.1f} secs".format(fname.split('/')[1], duration))
+		print("{0}\t{1:.1f} secs".format(fname.split('/')[-1], duration))
 		average = average + duration 
 average = average / len(onlyWavfiles)	
 print("average duration for {0}: {1:.1f} secs".format(indir, duration))
